@@ -1,0 +1,125 @@
+<nav id="navbar-main" class="navbar navbar-horizontal navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--top headroom--pinned">
+    <div class="container">
+        <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
+          <img src="./assets/img/brand/logo.png">
+        </a>
+        <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+      <div class="collapse navbar-collapse" id="navbar-default" [ngbCollapse]="isCollapsed"> 
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="../../index.html">
+                <img src="assets/img/brand/logo.png" />
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+                <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"
+                      [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+                  <span></span>
+                  <span></span>
+                </button>
+              </div>
+          </div>
+        </div>
+        <ul class="navbar-nav ml-lg-auto">
+          
+          <li class="nav-item d-none d-lg-block ml-lg-4">
+              <a href="https://www.creative-tim.com/product/argon-design-system-angular?ref=adsa-navbar" target="_blank" class="btn btn-primary btn-icon">
+                
+                <span class="nav-link-inner--text">REGISTER</span>
+              </a>
+            </li>
+            <li class="nav-item d-none d-lg-block ml-lg-4">
+                <a href="https://www.creative-tim.com/product/argon-design-system-angular?ref=adsa-navbar" target="_blank" class="btn btn-neutral btn-icon">
+                  
+                  <span class="nav-link-inner--text">LOGIN</span>
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<main>
+    <div class="position-relative">
+        <!-- shape Hero -->
+        <section class="section section-lg section-shaped pb-250">
+          <div class="shape shape-style-1 shape-default">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="container py-lg-md pt-100 d-flex home-hero">
+            <div class="col px-0">
+              <div class="row">
+                <div class="col-lg-6">
+                  <h1 class="display-3  text-white">We Provide B2B Services for companies
+                    <span> for keeping their Income and Expense information</span>
+                  </h1>
+                  <p class="lead  text-white">Tracking your income and expenses is one of the first steps in managing your money.</p>
+                  <div class="btn-wrapper">
+                    <a href="" class="btn btn-home btn-info btn-lg mb-3 mb-sm-0">
+                      <span class="home-btn btn-inner--text">REGISTER</span>
+                    </a>
+                    <a href="" class="btn btn-home btn-white btn-lg mb-3 mb-sm-0">
+                      <span class="home-btn btn-inner--text">LOGIN</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-lg-6 d-none d-md-block">
+                    <img src="assets/img/theme/hero-banner.png" class="img-fluid"/>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+        </section>
+        <!-- 1st Hero Variation -->
+      </div>
+  
+  
+</main>
+<footer class="footer" [ngClass]="{'has-cards': getPath()!=='/user-profile' && getPath()!=='/register' && getPath()!=='/login'}">
+  
+  <div class="container">
+    <div class="row row-grid align-items-center" [ngClass]="{'my-md': getPath()!=='/user-profile' && getPath()!=='/register' && getPath()!=='/login', 'mb-5':getPath()==='/user-profile' || getPath()==='/register' || getPath()==='/login'}">
+      <div class="col-lg-6">
+        <h3 class="text-primary font-weight-light mb-2">Thank you for supporting us!</h3>
+        <h4 class="mb-0 font-weight-light">Let's get in touch on any of these platforms.</h4>
+      </div>
+      <div class="col-lg-6 text-lg-center btn-wrapper">
+        <a target="_blank" href="#" class="btn btn-neutral btn-icon-only btn-twitter btn-round btn-lg" ngbTooltip="Follow us">
+          <i class="fas fa-twitter"></i>
+        </a>
+        <a target="_blank" href="#" class="btn btn-neutral btn-icon-only btn-facebook btn-round btn-lg" ngbTooltip="Like us">
+          <i class="fab fa-facebook-square"></i>
+        </a>
+        <a target="_blank" href="#" class="btn btn-neutral btn-icon-only btn-dribbble btn-lg btn-round" ngbTooltip="Follow us">
+          <i class="fa fa-dribbble"></i>
+        </a>
+        <a target="_blank" href="#" class="btn btn-neutral btn-icon-only btn-github btn-round btn-lg" ngbTooltip="Star on Github">
+          <i class="fa fa-github"></i>
+        </a>
+      </div>
+    </div>
+    <hr>
+    <div class="row align-items-center justify-content-md-between">
+      <div class="col-md-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy; {{test | date: 'yyyy'}}
+          <a href="#" class="font-weight-bold ml-1" target="_blank">DailyInEx.com</a>.
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</footer>

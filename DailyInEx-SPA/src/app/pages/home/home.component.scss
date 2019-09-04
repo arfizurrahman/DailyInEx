@@ -1,0 +1,52 @@
+.navbar-horizontal {
+    .navbar-brand {
+        img {
+            height: 50px;
+        }
+    }
+
+    .navbar-nav {
+        .nav-item {
+            margin-right: -10px;
+        }
+    }
+}
+
+.btn-inner--icon {
+    margin-right: 5px;
+}
+
+.home-btn {
+    font-size: 15px;
+}
+
+.btn-home {
+    padding: 0.875rem 3rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-horizontal {
+        .navbar-brand {
+            img {
+                height: 40px;
+            }
+        }
+    
+    }
+    .home-hero {
+        text-align: center;
+        padding-top: 80px; 
+        padding-bottom: 80px; 
+        .display-3 {
+            font-size: 25px;
+        }
+        .lead {
+            font-size: 16px;
+        }
+    }
+
+    
+.btn-home {
+    padding: 0.755rem 1rem;
+}
+}
