@@ -7,7 +7,7 @@ import {
   parseOptions,
   chartExample1,
   chartExample2
-} from "../../variables/charts";
+} from '../../variables/charts';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
     var chartSales = document.getElementById('chart-sales');
 
     this.salesChart = new Chart(chartSales, {
-			type: 'line',
+		  type: 'line',
 			options: chartExample1.options,
 			data: chartExample1.data
 		});
