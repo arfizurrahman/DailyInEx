@@ -4,11 +4,17 @@ using DailyInEx.API.Core.Repositories;
 
 namespace DailyInEx.API.Persistence.Repositories
 {
-    public class AuthRespository : IAuthRepository
+    public class AuthRepository : IAuthRepository
     {
-        public Task<User> Login(string username, string password)
+        private readonly DataContext _context;
+
+        public AuthRepository(DataContext context)
         {
-            throw new System.NotImplementedException();
+            _context = context;
+        }
+        public async Task<User> Login(string email, string password)
+        {
+            
         }
 
         public Task<User> Register(User user, string password)
