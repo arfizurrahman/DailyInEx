@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DailyInEx.API.Core.Dtos;
 using DailyInEx.API.Core.Models;
-using DailyInEx.API.Core.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace DailyInEx.API.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -39,6 +40,7 @@ namespace DailyInEx.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
+            userForRegisterDto.UserName = userForRegisterDto.Email;
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
@@ -46,8 +48,7 @@ namespace DailyInEx.API.Controllers
             var userToReturn = _mapper.Map<UserToReturnDto>(userToCreate);
 
             if(result.Succeeded) {
-                 return CreatedAtRoute("GetUser", 
-                    new { Controller= "Users", id = userToCreate.Id}, userToReturn);
+                 return CreatedAtRoute(null, null, userToReturn);
             }
 
             return BadRequest(result.Errors);

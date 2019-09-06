@@ -23,7 +23,6 @@ namespace DailyInEx.API
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -51,6 +50,11 @@ namespace DailyInEx.API
                         ValidateAudience = false
                     };
                 });
+
+            services.AddAuthorization(options => {
+                options.AddPolicy("RequiredAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+            });
             services.AddMvc(options => 
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -67,11 +71,11 @@ namespace DailyInEx.API
             services.AddCors();
             Mapper.Reset();
             services.AddAutoMapper();
-
+            services.AddTransient<Seed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -79,10 +83,11 @@ namespace DailyInEx.API
             }
             else
             {
-                app.UseHsts();
+                //app.UseHsts();
             }
 
             // app.UseHttpsRedirection();
+            seeder.SeedUsers();
             app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();

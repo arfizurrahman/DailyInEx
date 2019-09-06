@@ -6,6 +6,7 @@ namespace DailyInEx.API.Core.Dtos
     {
         [Required(ErrorMessage = "Please enter name")]
         public string Name { get; set; }
+        public string UserName { get; set; }
         [Required(ErrorMessage = "Please enter email")]
         public string Email { get; set; }
 
