@@ -23,13 +23,13 @@
         
         <div class="card-body px-lg-5 py-lg-5">
          
-          <form role="form">
+          <form role="form" #loginForm="ngForm" (ngSubmit)="login()">
             <div class="form-group mb-3">
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email">
+                <input class="form-control" placeholder="Email" type="email" required name="email" [(ngModel)]="model.email">
               </div>
             </div>
             <div class="form-group">
@@ -37,17 +37,17 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="Password" type="password">
+                <input class="form-control" placeholder="Password" type="password" [(ngModel)]="model.password" name="password" required>
               </div>
             </div>
-            <div class="custom-control custom-control-alternative custom-checkbox">
+            <!-- <div class="custom-control custom-control-alternative custom-checkbox">
               <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
               <label class="custom-control-label" for=" customCheckLogin">
                 <span class="text-muted">Remember me</span>
               </label>
-            </div>
+            </div> -->
             <div class="text-center">
-              <button type="button" class="btn btn-primary my-4">Sign in</button>
+              <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary my-4">Sign in</button>
             </div>
           </form>
         </div>

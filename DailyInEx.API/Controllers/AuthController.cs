@@ -58,8 +58,11 @@ namespace DailyInEx.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto) 
         {
-            var user = await _userManager.FindByNameAsync(userForLoginDto.Email);
+            var user = await _userManager.FindByEmailAsync(userForLoginDto.Email);
             
+            if(user == null)
+                return BadRequest("No user found with this email");
+
             var result = await _signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
             if(result.Succeeded){
                 var appUser = await _userManager.Users
