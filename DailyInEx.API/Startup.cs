@@ -1,7 +1,9 @@
 ﻿using System.Text;
 using AutoMapper;
 using DailyInEx.API.Core.Models;
+using DailyInEx.API.Core.Repositories;
 using DailyInEx.API.Persistence;
+using DailyInEx.API.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -72,6 +74,7 @@ namespace DailyInEx.API
             Mapper.Reset();
             services.AddAutoMapper();
             services.AddTransient<Seed>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

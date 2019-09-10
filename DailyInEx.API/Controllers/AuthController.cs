@@ -48,7 +48,8 @@ namespace DailyInEx.API.Controllers
             var userToReturn = _mapper.Map<UserToReturnDto>(userToCreate);
 
             if(result.Succeeded) {
-                 return CreatedAtRoute(null, null, userToReturn);
+                  return CreatedAtRoute("GetUser", 
+                    new { Controller= "Users", id = userToCreate.Id}, userToReturn);
             }
 
             return BadRequest(result.Errors);
