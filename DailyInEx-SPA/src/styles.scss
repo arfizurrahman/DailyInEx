@@ -1,3 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/alertifyjs/build/css/alertify.min.css';
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+
+.alertify-notifier{
+	border-radius: 6px;
+	color: #FFF;
+    text-shadow: -1px -1px 0 rgba(0,0,0,.5);
+    border: none;
+}
+.alertify-notifier .ajs-message.ajs-error {
+	background: #FE1A00;
+		background: rgba(254,26,0,.9);
+}
+.alertify-notifier .ajs-message.ajs-success {
+	background: #5CB811;
+		background: rgba(92,184,17,.9);
+}
+	

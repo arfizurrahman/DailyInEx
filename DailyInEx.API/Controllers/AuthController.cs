@@ -62,7 +62,7 @@ namespace DailyInEx.API.Controllers
             var user = await _userManager.FindByEmailAsync(userForLoginDto.Email);
             
             if(user == null)
-                return BadRequest("No user found with this email");
+                return BadRequest("No user found with this email!");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
             if(result.Succeeded){
@@ -77,7 +77,7 @@ namespace DailyInEx.API.Controllers
                 });
             }
 
-            return Unauthorized();
+            return BadRequest("Invalid login information!");
         }
 
         private async Task<string> GenerateJwtToken(User user)

@@ -21,9 +21,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    console.log(this.model.email);
     this.authService.login(this.model).subscribe(next =>  {
-     this.alertify.success('Loggged in successfully');
+    //  this.alertify.success('Loggged in successfully');
     }, error => {
       this.alertify.error(error.error);
     }, () => {
