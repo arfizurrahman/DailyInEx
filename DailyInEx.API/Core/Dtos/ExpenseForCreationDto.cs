@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DailyInEx.API.Core.Dtos
 {
-    public class IncomeForCreationDto
+    public class ExpenseForCreationDto
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Please enter amount")]
