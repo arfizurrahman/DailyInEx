@@ -4,14 +4,16 @@ using DailyInEx.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DailyInEx.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190912011619_CreateIncomeExpenseTables")]
+    partial class CreateIncomeExpenseTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,8 +38,6 @@ namespace DailyInEx.API.Migrations
                     b.Property<bool>("IsCash");
 
                     b.Property<bool>("IsCheck");
-
-                    b.Property<bool>("IsDeleted");
 
                     b.Property<int>("UserId");
 
@@ -65,8 +65,6 @@ namespace DailyInEx.API.Migrations
                     b.Property<bool>("IsCash");
 
                     b.Property<bool>("IsCheck");
-
-                    b.Property<bool>("IsDeleted");
 
                     b.Property<int>("UserId");
 
