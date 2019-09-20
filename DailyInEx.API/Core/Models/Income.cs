@@ -13,6 +13,7 @@ namespace DailyInEx.API.Core.Models
         public DateTime Date { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public bool IsApproved { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

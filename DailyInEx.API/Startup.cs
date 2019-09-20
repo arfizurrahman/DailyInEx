@@ -76,7 +76,8 @@ namespace DailyInEx.API
             services.AddTransient<Seed>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<ICommonRepository, CommonRepository>();
-            // services.AddScoped<IIncomeRepository, IncomeRepository>();
+            services.AddScoped<IIncomeRepository, IncomeRepository>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

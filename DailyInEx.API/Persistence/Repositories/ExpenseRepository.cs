@@ -7,34 +7,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DailyInEx.API.Persistence.Repositories
 {
-    public class IncomeRepository : IIncomeRepository
+    public class ExpenseRepository : IExpenseRepository
     {
         private readonly DataContext _context;
 
-        public IncomeRepository(DataContext context)
+        public ExpenseRepository(DataContext context)
         {
             _context = context;
         }
-        public async Task<Income> GetIncome(int id)
+        public async Task<Expense> GetExpense(int id)
         {
-            return await _context.Incomes.FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.Expenses.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<IEnumerable<Income>> GetMonthlyIncomes(int id, string monthYear)
+        public async Task<IEnumerable<Expense>> GetMonthlyExpenses(int id, string monthYear)
         {
-            var incomes = await _context.Incomes
+            var expenses = await _context.Expenses
                         .Where(i => i.Date.ToString()
                         .Contains(monthYear) && i.UserId == id && 
                         i.IsApproved).ToListAsync();
-            return incomes;
+            return expenses;
             
         }
 
-        public async Task<IEnumerable<Income>> GetPendingIncomes(int id)
+        public async Task<IEnumerable<Expense>> GetPendingExpenses(int id)
         {
-            var incomes = await _context.Incomes
+            var expenses = await _context.Expenses
                         .Where(i => i.UserId == id && !i.IsApproved).ToListAsync();
-            return incomes;
+            return expenses;
         }
     }
 }

@@ -12,5 +12,6 @@ namespace DailyInEx.API.Core.Dtos
         public string BankName { get; set; }
         public DateTime Date { get; set; }
         public int UserId { get; set; }
+        public bool IsApproved { get; set; }
     }
 }
