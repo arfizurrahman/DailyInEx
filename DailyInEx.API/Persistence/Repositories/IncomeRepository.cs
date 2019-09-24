@@ -15,6 +15,12 @@ namespace DailyInEx.API.Persistence.Repositories
         {
             _context = context;
         }
+
+        public async Task<IEnumerable<Income>> ApprovePendingIncomes(int id, int[] ids)
+        {
+            return await _context.Incomes.Where(i => ids.Contains(i.Id)).ToListAsync();
+        }
+
         public async Task<Income> GetIncome(int id)
         {
             return await _context.Incomes.FirstOrDefaultAsync(i => i.Id == id);

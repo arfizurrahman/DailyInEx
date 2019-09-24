@@ -36,5 +36,7 @@ namespace DailyInEx.API.Persistence.Repositories
                         .Where(i => i.UserId == id && !i.IsApproved).ToListAsync();
             return expenses;
         }
+
+
     }
 }

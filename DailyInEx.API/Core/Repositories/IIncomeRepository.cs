@@ -9,5 +9,6 @@ namespace DailyInEx.API.Core.Repositories
          Task<Income> GetIncome(int id);
          Task<IEnumerable<Income>> GetPendingIncomes(int id);
          Task<IEnumerable<Income>> GetMonthlyIncomes(int id, string monthYear);
+         Task<IEnumerable<Income>> ApprovePendingIncomes(int id, int[] ids);
     }
 }

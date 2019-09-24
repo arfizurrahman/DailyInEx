@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DailyInEx.API.Core.Models;
 using DailyInEx.API.Core.Repositories;
+using DailyInEx.API.Core.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace DailyInEx.API.Persistence.Repositories
 {
@@ -23,14 +26,11 @@ namespace DailyInEx.API.Persistence.Repositories
             _context.Remove(entity);
         }
 
-        public Task<IEnumerable<Income>> GetYearlyProfits(int id, string year)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        
     }
 }

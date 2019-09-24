@@ -64,12 +64,21 @@ namespace DailyInEx.API.Controllers
         {
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-                
+
             var incomesFromRepo =  await _incomeRepo.GetPendingIncomes(userId);
 
             var incomesToReturn = _mapper.Map<IEnumerable<IncomeToReturnDto>>(incomesFromRepo);
 
             return Ok(incomesToReturn);
         }
+
+        // [HttpPost("Approve")]
+        // public async Task<IActionResult> ApprovePendingIncomes(int userId, int[] ids)
+        // {
+        //     if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        //         return Unauthorized();
+            
+        //     var incomesToApprove = _
+        // }
     }
 }

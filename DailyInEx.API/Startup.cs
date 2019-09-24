@@ -78,6 +78,7 @@ namespace DailyInEx.API
             services.AddScoped<ICommonRepository, CommonRepository>();
             services.AddScoped<IIncomeRepository, IncomeRepository>();
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            services.AddScoped<IProfitRepository, ProfitRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,7 +12,8 @@ namespace DailyInEx.API.Helpers
             CreateMap<UserForRegisterDto, User>();
             CreateMap<IncomeForCreationDto, Income>();
             CreateMap<Income, IncomeToReturnDto>();
-            // CreateMap<Income, Ex>();
+            CreateMap<ExpenseForCreationDto, Expense>();
+            CreateMap<Expense, ExpenseToReturnDto>();
         }
     }
 }
