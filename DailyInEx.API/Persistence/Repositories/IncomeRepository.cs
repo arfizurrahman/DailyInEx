@@ -42,5 +42,12 @@ namespace DailyInEx.API.Persistence.Repositories
                         .Where(i => i.UserId == id && !i.IsApproved).ToListAsync();
             return incomes;
         }
+
+        public async Task<IEnumerable<Income>> GetPendingIncomes()
+        {
+           var incomes = await _context.Incomes
+                        .Where(i => !i.IsApproved).ToListAsync();
+            return incomes;
+        }
     }
 }

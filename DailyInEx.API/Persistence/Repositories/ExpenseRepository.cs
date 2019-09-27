@@ -37,6 +37,11 @@ namespace DailyInEx.API.Persistence.Repositories
             return expenses;
         }
 
-
+        public async Task<IEnumerable<Expense>> GetPendingExpenses()
+        {
+            var expenses = await _context.Expenses
+                        .Where(i => !i.IsApproved).ToListAsync();
+            return expenses;
+        }
     }
 }

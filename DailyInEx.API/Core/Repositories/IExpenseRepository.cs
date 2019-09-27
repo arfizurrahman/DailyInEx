@@ -8,6 +8,7 @@ namespace DailyInEx.API.Core.Repositories
     {
          Task<Expense> GetExpense(int id);
          Task<IEnumerable<Expense>> GetPendingExpenses(int id);
+         Task<IEnumerable<Expense>> GetPendingExpenses();
          Task<IEnumerable<Expense>> GetMonthlyExpenses(int id, string monthYear);
 
     }

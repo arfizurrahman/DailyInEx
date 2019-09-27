@@ -71,5 +71,18 @@ namespace DailyInEx.API.Controllers
 
             return Ok(expensesToReturn);
         }
+
+        [HttpGet("Monthly")]
+        public async Task<IActionResult> GetMonthlyExpenses(int userId, string monthYear)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var monthlyExpenses = await _expenseRepo.GetMonthlyExpenses(userId, monthYear);
+
+            var expensesToReturn = _mapper.Map<IEnumerable<ExpenseToReturnDto>>(monthlyExpenses);
+
+            return Ok(expensesToReturn);
+        }
     }
 }

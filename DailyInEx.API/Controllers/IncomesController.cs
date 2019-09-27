@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -72,13 +73,35 @@ namespace DailyInEx.API.Controllers
             return Ok(incomesToReturn);
         }
 
-        // [HttpPost("Approve")]
-        // public async Task<IActionResult> ApprovePendingIncomes(int userId, int[] ids)
-        // {
-        //     if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-        //         return Unauthorized();
+        [HttpGet("Monthly")]
+        public async Task<IActionResult> GetMonthlyIncomes(int userId, string monthYear)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
             
-        //     var incomesToApprove = _
-        // }
+            var monthlyIncomes = await _incomeRepo.GetMonthlyIncomes(userId, monthYear);
+
+            var incomesToReturn = _mapper.Map<IEnumerable<IncomeToReturnDto>>(monthlyIncomes);
+
+            return Ok(incomesToReturn);
+        }
+
+        [HttpPost("Approve")]
+        public async Task<IActionResult> ApprovePendingIncomes(int userId, IncomesApproveDto incomesApproveDto)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var incomesToApprove = await _incomeRepo.GetPendingIncomes(userId);
+            incomesToApprove = incomesToApprove.Where(i => incomesApproveDto.IncomeIds.Contains(i.Id));
+            foreach(var income in incomesToApprove)
+            {
+                income.IsApproved = true;
+            }
+
+            await _commonRepo.SaveAll();
+
+            return NoContent();
+        }
     }
 }
