@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app.routing';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthService } from './services/auth.service';
+import { IncomeService } from './services/income.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    IncomeService
   ],
   bootstrap: [AppComponent]
 })
