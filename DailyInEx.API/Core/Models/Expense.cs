@@ -10,6 +10,7 @@ namespace DailyInEx.API.Core.Models
         public bool IsCheck { get; set; }
         public string CheckNo { get; set; }
         public string BankName { get; set; }
+        public string Particular { get; set; }
         public DateTime Date { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }

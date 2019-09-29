@@ -6,6 +6,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
+
+import { ErrorInterceptorProvider } from './services/error.interceptor';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
@@ -13,6 +16,10 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { HomeComponent } from './pages/home/home.component';
 import { AuthService } from './services/auth.service';
 import { IncomeService } from './services/income.service';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -28,11 +35,19 @@ import { IncomeService } from './services/income.service';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    JwtModule.forRoot({
+      config: {
+         tokenGetter: tokenGetter,
+         whitelistedDomains: ['localhost:5000'],
+         blacklistedRoutes: ['localhost:5000/api/auth']
+      }
+   })
   ],
   providers: [
     AuthService,
-    IncomeService
+    IncomeService,
+    ErrorInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })

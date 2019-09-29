@@ -11,11 +11,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class IncomeService {
   baseUrl = environment.apiUrl;
   jwtHelper = new JwtHelperService();
-  decodedToken: any;
 
   constructor(private http: HttpClient) { }
 
   saveIncome(userId: Number, income: Income) {
-    return this.http.post(this.baseUrl + 'users/'+ userId + '/incomes', income);
+    return this.http.post(this.baseUrl + 'users/' + userId + '/incomes', income);
   }
 }

@@ -12,6 +12,7 @@ namespace DailyInEx.API.Core.Dtos
         public bool IsCheck { get; set; }
         public string CheckNo { get; set; }
         public string BankName { get; set; }
+        public string Particular { get; set; }
         [Required(ErrorMessage = "Please enter date")]
         public DateTime Date { get; set; }
         public int UserId { get; set; }

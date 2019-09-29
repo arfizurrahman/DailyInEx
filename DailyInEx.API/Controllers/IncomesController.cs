@@ -47,7 +47,7 @@ namespace DailyInEx.API.Controllers
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
             
-            incomeForCreationDto.Date = DateTime.Now;
+            // incomeForCreationDto.Date = DateTime.Now;
             incomeForCreationDto.UserId = userId;
             var incomeToCreate = _mapper.Map<Income>(incomeForCreationDto);
 
