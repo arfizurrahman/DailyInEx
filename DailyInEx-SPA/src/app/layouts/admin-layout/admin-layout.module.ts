@@ -11,6 +11,7 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SaveIncomeComponent } from 'src/app/pages/save-income/save-income.component';
+import { SaveExpenseComponent } from 'src/app/pages/save-expense/save-expense.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SaveIncomeComponent } from 'src/app/pages/save-income/save-income.compo
     DashboardComponent,
     UserProfileComponent,
     TablesComponent,
-    SaveIncomeComponent
+    SaveIncomeComponent,
+    SaveExpenseComponent
   ]
 })
 

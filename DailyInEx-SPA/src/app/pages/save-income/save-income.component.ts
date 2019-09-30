@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Income } from './../../models/Income';
+import { Income } from '../../models/income';
 import { Router } from '@angular/router';
 import { IncomeService } from 'src/app/services/income.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
@@ -70,8 +70,7 @@ export class SaveIncomeComponent implements OnInit {
       this.incomeService.saveIncome(this.authService.decodedToken.nameid, this.income).subscribe(() => {
         this.alertify.success('Income info saved successfully');
       }, error => {
-        // this.alertify.error(error);
-        console.log(error);
+        this.alertify.error(error);
       }, () => {
           this.router.navigate(['/dashboard']);
       });
