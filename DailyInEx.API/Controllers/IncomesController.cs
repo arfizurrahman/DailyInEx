@@ -60,18 +60,18 @@ namespace DailyInEx.API.Controllers
             throw new Exception("Creating the income failed on save");
         }
 
-        [HttpGet("Pending")]
-        public async Task<IActionResult> GetPendingIncomes(int userId)
-        {
-            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+        // [HttpGet("Pending")]
+        // public async Task<IActionResult> GetPendingIncomes(int userId)
+        // {
+        //     if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        //         return Unauthorized();
 
-            var incomesFromRepo =  await _incomeRepo.GetPendingIncomes(userId);
+        //     var incomesFromRepo =  await _incomeRepo.GetPendingIncomes(userId);
 
-            var incomesToReturn = _mapper.Map<IEnumerable<IncomeToReturnDto>>(incomesFromRepo);
+        //     var incomesToReturn = _mapper.Map<IEnumerable<IncomeToReturnDto>>(incomesFromRepo);
 
-            return Ok(incomesToReturn);
-        }
+        //     return Ok(incomesToReturn);
+        // }
 
         [HttpGet("Monthly")]
         public async Task<IActionResult> GetMonthlyIncomes(int userId, string monthYear)
@@ -86,22 +86,22 @@ namespace DailyInEx.API.Controllers
             return Ok(incomesToReturn);
         }
 
-        [HttpPost("Approve")]
-        public async Task<IActionResult> ApprovePendingIncomes(int userId, IncomesApproveDto incomesApproveDto)
-        {
-            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+        // [HttpPost("Approve")]
+        // public async Task<IActionResult> ApprovePendingIncomes(int userId, IncomesApproveDto incomesApproveDto)
+        // {
+        //     if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        //         return Unauthorized();
             
-            var incomesToApprove = await _incomeRepo.GetPendingIncomes(userId);
-            incomesToApprove = incomesToApprove.Where(i => incomesApproveDto.IncomeIds.Contains(i.Id));
-            foreach(var income in incomesToApprove)
-            {
-                income.IsApproved = true;
-            }
+        //     var incomesToApprove = await _incomeRepo.GetPendingIncomes(userId);
+        //     incomesToApprove = incomesToApprove.Where(i => incomesApproveDto.IncomeIds.Contains(i.Id));
+        //     foreach(var income in incomesToApprove)
+        //     {
+        //         income.IsApproved = true;
+        //     }
 
-            await _commonRepo.SaveAll();
+        //     await _commonRepo.SaveAll();
 
-            return NoContent();
-        }
+        //     return NoContent();
+        // }
     }
 }

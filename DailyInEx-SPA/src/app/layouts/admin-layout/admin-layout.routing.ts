@@ -6,6 +6,7 @@ import { SaveIncomeComponent } from '../../pages/save-income/save-income.compone
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { SaveExpenseComponent } from 'src/app/pages/save-expense/save-expense.component';
 import { ApproveIncomesComponent } from 'src/app/pages/approve-incomes/approve-incomes.component';
+import { IncomesResolver } from 'src/app/resolvers/incomes.resolver';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -13,5 +14,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'tables',         component: TablesComponent },
     { path: 'save-income',         component: SaveIncomeComponent },
     { path: 'save-expense',         component: SaveExpenseComponent },
-    { path: 'approve-incomes',         component: ApproveIncomesComponent },
+    { path: 'approve-incomes',         component: ApproveIncomesComponent, resolve: { incomes: IncomesResolver} },
 ];

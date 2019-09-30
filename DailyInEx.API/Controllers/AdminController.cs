@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DailyInEx.API.Core.Dtos;
 using DailyInEx.API.Core.Repositories;
+using DailyInEx.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -61,12 +62,14 @@ namespace DailyInEx.API.Controllers
 
         [Authorize(Policy = "RequiredAdminRole")]
         [HttpGet("PendingIncomes")]
-        public async Task<IActionResult> GetPendingIncomes()
+        public async Task<IActionResult> GetPendingIncomes([FromQuery] TableParams tableParams)
         {
-            var incomesFromRepo =  await _incomeRepo.GetPendingIncomes();
+            var incomesFromRepo =  await _incomeRepo.GetPendingIncomes(tableParams);
 
             var incomesToReturn = _mapper.Map<IEnumerable<IncomeToReturnDto>>(incomesFromRepo);
-
+            Response.AddPagination(incomesFromRepo.CurrentPage, 
+                incomesFromRepo.PageSize, incomesFromRepo.TotalCount, 
+                incomesFromRepo.TotalPages);
             return Ok(incomesToReturn);
         }
 
