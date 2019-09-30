@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -12,6 +13,7 @@ import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SaveIncomeComponent } from 'src/app/pages/save-income/save-income.component';
 import { SaveExpenseComponent } from 'src/app/pages/save-expense/save-expense.component';
+import { ApproveIncomesComponent } from './../../pages/approve-incomes/approve-incomes.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -29,7 +31,8 @@ import { SaveExpenseComponent } from 'src/app/pages/save-expense/save-expense.co
     UserProfileComponent,
     TablesComponent,
     SaveIncomeComponent,
-    SaveExpenseComponent
+    SaveExpenseComponent,
+    ApproveIncomesComponent
   ]
 })
 

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DailyInEx.API.Core.Models;
 using DailyInEx.API.Core.Repositories;
+using DailyInEx.API.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace DailyInEx.API.Persistence.Repositories
@@ -43,11 +44,12 @@ namespace DailyInEx.API.Persistence.Repositories
             return incomes;
         }
 
-        public async Task<IEnumerable<Income>> GetPendingIncomes()
+        public async Task<PagedList<Income>> GetPendingIncomes(TableParams tableParams)
         {
-           var incomes = await _context.Incomes
-                        .Where(i => !i.IsApproved).ToListAsync();
-            return incomes;
+           var incomes = _context.Incomes
+                        .Where(i => !i.IsApproved);
+
+            return await PagedList<Income>.CreateAsync(incomes, tableParams.PageNumber, tableParams.PageSize);
         }
     }
 }
