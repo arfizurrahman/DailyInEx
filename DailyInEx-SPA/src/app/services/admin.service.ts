@@ -37,4 +37,8 @@ export class AdminService {
         })
       );
   }
+
+  approveSelectedIncomes(incomeIds: {}) {
+    return this.http.post(this.baseUrl + 'admin/approveIncomes', {incomeIds});
+  }
 }

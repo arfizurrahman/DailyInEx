@@ -14,7 +14,7 @@ import { AdminService } from 'src/app/services/admin.service';
 export class ApproveIncomesComponent implements OnInit {
   incomes: Income[];
   pagination: Pagination;
-  incomesToApprove: number[] = [];
+  incomeIds: number[] = [];
 
   constructor(private alertify: AlertifyService,
               private adminService: AdminService,
@@ -44,26 +44,33 @@ export class ApproveIncomesComponent implements OnInit {
   }
 
   addToApprovalCollection(id: number) {
-    if (this.incomesToApprove.includes(id)) {
-      this.incomesToApprove.splice(this.incomesToApprove.indexOf(id), 1);
+    if (this.incomeIds.includes(id)) {
+      this.incomeIds.splice(this.incomeIds.indexOf(id), 1);
     } else {
-      this.incomesToApprove.push(id);
+      this.incomeIds.push(id);
     }
-    console.log(this.incomesToApprove);
+    console.log(this.incomeIds);
   }
 
   approveSelectedIncomes() {
-    if (this.incomesToApprove.length === 0) {
+    if (this.incomeIds.length === 0) {
       this.alertify.error('Please select income(s) to approve');
       return;
     }
-    if (this.incomesToApprove.length > 0) {
-      console.log(this.incomesToApprove);
+    if (this.incomeIds.length > 0) {
+      this.adminService.approveSelectedIncomes(this.incomeIds).subscribe(() => {
+        this.incomeIds.forEach(element => {
+          this.incomes.splice(this.incomes.findIndex(i => i.id === element), 1);
+        });
+        this.getIncomesForApproval();
+      }, error => {
+        this.alertify.error(error);
+      });
     }
   }
 
   approveAllIncomes() {
-    this.alertify.confirm('Are you sure you want to approve all incomes', () => {
+    this.alertify.confirm('Are you sure you want to approve all incomes?', () => {
       console.log('Yes');
     });
   }

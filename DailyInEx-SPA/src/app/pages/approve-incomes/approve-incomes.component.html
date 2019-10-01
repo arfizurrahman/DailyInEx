@@ -106,6 +106,7 @@
               <tr>
                 <th scope="col">Select</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Cash/Check</th>
                 <th scope="col">Particular</th>
                 <th scope="col">Date</th>
               </tr>
@@ -114,11 +115,12 @@
               <tr *ngFor="let income of incomes">
                 <td>
                   <div class="custom-control custom-checkbox mb-3">
-                    <input class="custom-control-input" [checked]="incomesToApprove.includes(income.id)" [id]="'customCheck' + income.id" [value]="income.id" (change)="addToApprovalCollection(income.id)" type="checkbox">
+                    <input class="custom-control-input" [checked]="incomeIds.includes(income.id)" [id]="'customCheck' + income.id" [value]="income.id" (change)="addToApprovalCollection(income.id)" type="checkbox">
                     <label class="custom-control-label" [for]="'customCheck' + income.id"></label>
                   </div>
                 </td>
                 <td>{{ income.amount }}</td>
+                <td><span *ngIf="income.isCash">Cash</span><span *ngIf="income.isCheck">Check</span></td>
                 <td>{{ income.particular }}</td>
                 <td>{{ income.date | date : 'longDate'}}</td>
               </tr>
