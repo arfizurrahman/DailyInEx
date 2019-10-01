@@ -71,7 +71,12 @@ export class ApproveIncomesComponent implements OnInit {
 
   approveAllIncomes() {
     this.alertify.confirm('Are you sure you want to approve all incomes?', () => {
-      console.log('Yes');
+      this.adminService.approveAllIncomes().subscribe(() => {
+        this.incomeIds = [];
+        this.getIncomesForApproval();
+      }, error => {
+        this.alertify.error(error);
+      });
     });
   }
 

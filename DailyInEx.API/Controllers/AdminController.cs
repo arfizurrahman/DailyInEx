@@ -33,7 +33,9 @@ namespace DailyInEx.API.Controllers
         public async Task<IActionResult> ApprovePendingIncomes(IncomesApproveDto incomesApproveDto)
         {
             var incomesToApprove = await _incomeRepo.GetPendingIncomes();
-            incomesToApprove = incomesToApprove.Where(i => incomesApproveDto.IncomeIds.Contains(i.Id));
+            if(incomesApproveDto.IncomeIds != null) {
+                incomesToApprove = incomesToApprove.Where(i => incomesApproveDto.IncomeIds.Contains(i.Id));
+            }
             foreach(var income in incomesToApprove)
             {
                 income.IsApproved = true;

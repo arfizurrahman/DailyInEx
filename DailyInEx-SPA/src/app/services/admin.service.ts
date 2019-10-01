@@ -41,4 +41,8 @@ export class AdminService {
   approveSelectedIncomes(incomeIds: {}) {
     return this.http.post(this.baseUrl + 'admin/approveIncomes', {incomeIds});
   }
+
+  approveAllIncomes() {
+    return this.http.post(this.baseUrl + 'admin/approveIncomes', {approveAll: true});
+  }
 }
