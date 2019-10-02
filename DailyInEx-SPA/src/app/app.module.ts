@@ -18,6 +18,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { AuthService } from './services/auth.service';
 import { IncomeService } from './services/income.service';
 import { IncomesResolver } from './resolvers/incomes.resolver';
+import { ExpensesResolver } from './resolvers/expenses.resolver';
+import { MonthlyExpensesComponent } from './pages/monthly-expenses/monthly-expenses.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -28,7 +30,8 @@ export function tokenGetter() {
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    HomeComponent
+    HomeComponent,
+    MonthlyExpensesComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -51,7 +54,8 @@ export function tokenGetter() {
     AuthService,
     IncomeService,
     ErrorInterceptorProvider,
-    IncomesResolver
+    IncomesResolver,
+    ExpensesResolver
   ],
   bootstrap: [AppComponent]
 })

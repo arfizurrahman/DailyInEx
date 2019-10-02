@@ -95,6 +95,18 @@
                   {{menuItem.title}}
               </a>
           </li>
+          <li class="nav-item" *appHasRole="['Admin','Moderator']">
+              <a routerLinkActive="active" [routerLink]="['/approve-incomes']" class="nav-link">
+                  <i class="ni ni-check-bold text-green"></i>
+                  Approve Incomes
+              </a>
+          </li>
+          <li class="nav-item" *appHasRole="['Admin','Moderator']">
+              <a routerLinkActive="active" [routerLink]="['/approve-expenses']" class="nav-link">
+                  <i class="ni ni-check-bold text-red"></i>
+                  Approve Expenses
+              </a>
+          </li>
       </ul>
       <!-- Divider -->
       <hr class="my-3">

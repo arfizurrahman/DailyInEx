@@ -59,18 +59,18 @@ namespace DailyInEx.API.Controllers
             throw new Exception("Creating the expense failed on save");
         }
 
-        [HttpGet("Pending")]
-        public async Task<IActionResult> GetPendingExpenses(int userId)
-        {
-            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+        // [HttpGet("Pending")]
+        // public async Task<IActionResult> GetPendingExpenses(int userId)
+        // {
+        //     if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        //         return Unauthorized();
                 
-            var expensesFromRepo =  await _expenseRepo.GetPendingExpenses(userId);
+        //     var expensesFromRepo =  await _expenseRepo.GetPendingExpenses(userId);
 
-            var expensesToReturn = _mapper.Map<IEnumerable<ExpenseToReturnDto>>(expensesFromRepo);
+        //     var expensesToReturn = _mapper.Map<IEnumerable<ExpenseToReturnDto>>(expensesFromRepo);
 
-            return Ok(expensesToReturn);
-        }
+        //     return Ok(expensesToReturn);
+        // }
 
         [HttpGet("Monthly")]
         public async Task<IActionResult> GetMonthlyExpenses(int userId, string monthYear)

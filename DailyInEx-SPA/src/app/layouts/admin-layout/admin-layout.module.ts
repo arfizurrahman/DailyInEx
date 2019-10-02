@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SaveIncomeComponent } from 'src/app/pages/save-income/save-income.component';
 import { SaveExpenseComponent } from 'src/app/pages/save-expense/save-expense.component';
 import { ApproveIncomesComponent } from './../../pages/approve-incomes/approve-incomes.component';
+import { ApproveExpensesComponent } from 'src/app/pages/approve-expenses/approve-expenses.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ApproveIncomesComponent } from './../../pages/approve-incomes/approve-i
     TablesComponent,
     SaveIncomeComponent,
     SaveExpenseComponent,
-    ApproveIncomesComponent
+    ApproveIncomesComponent,
+    ApproveExpensesComponent
   ]
 })
 

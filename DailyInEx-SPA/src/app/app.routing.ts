@@ -8,7 +8,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 
-const routes: Routes =[
+const routes: Routes = [
   {
     path: '', component: HomeComponent
   }, {
@@ -19,6 +19,8 @@ const routes: Routes =[
     children: [
       {
         path: '',
+        runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard],
         loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
       }
     ]

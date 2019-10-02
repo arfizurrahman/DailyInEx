@@ -5,6 +5,7 @@ import { PaginatedResult } from '../models/pagination';
 import { Income } from '../models/income';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Expense } from '../models/expense';
 
 @Injectable({
   providedIn: 'root'
@@ -38,11 +39,41 @@ export class AdminService {
       );
   }
 
+  getExpensesForApproval(page?, itemsPerPage?) {
+    const paginatedResult: PaginatedResult<Expense[]> = new PaginatedResult<Expense[]>();
+
+    let params = new HttpParams();
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+
+    return this.http.get<Expense[]>(this.baseUrl + 'admin/pendingExpenses', {observe: 'response', params})
+      .pipe(
+        map( response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') !== null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+
+          return paginatedResult;
+        })
+      );
+  }
+
   approveSelectedIncomes(incomeIds: {}) {
     return this.http.post(this.baseUrl + 'admin/approveIncomes', {incomeIds});
   }
 
   approveAllIncomes() {
     return this.http.post(this.baseUrl + 'admin/approveIncomes', {approveAll: true});
+  }
+  approveSelectedExpenses(expenseIds: {}) {
+    return this.http.post(this.baseUrl + 'admin/approveExpenses', {expenseIds});
+  }
+
+  approveAllExpenses() {
+    return this.http.post(this.baseUrl + 'admin/approveExpenses', {approveAll: true});
   }
 }

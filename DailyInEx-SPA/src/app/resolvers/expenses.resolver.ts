@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { Income } from '../models/income';
 import { AlertifyService } from '../services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AdminService } from '../services/admin.service';
+import { Expense } from '../models/expense';
 
 @Injectable()
-export class IncomesResolver implements Resolve<Income[]> {
+export class ExpensesResolver implements Resolve<Expense[]> {
     pageNumber = 1;
     pageSize = 5;
 
@@ -15,10 +15,10 @@ export class IncomesResolver implements Resolve<Income[]> {
                 private alertify: AlertifyService,
                 private adminService: AdminService) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<Income[]> {
-        return this.adminService.getIncomesForApproval(this.pageNumber, this.pageSize).pipe(
+    resolve(route: ActivatedRouteSnapshot): Observable<Expense[]> {
+        return this.adminService.getExpensesForApproval(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
-                this.alertify.error('Problem retrieving pending incomes');
+                this.alertify.error('Problem retrieving pending expenses');
                 this.router.navigate(['/home']);
                 return of(null);
             })

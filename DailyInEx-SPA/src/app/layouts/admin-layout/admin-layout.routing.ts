@@ -7,12 +7,21 @@ import { TablesComponent } from '../../pages/tables/tables.component';
 import { SaveExpenseComponent } from 'src/app/pages/save-expense/save-expense.component';
 import { ApproveIncomesComponent } from 'src/app/pages/approve-incomes/approve-incomes.component';
 import { IncomesResolver } from 'src/app/resolvers/incomes.resolver';
+import { ApproveExpensesComponent } from 'src/app/pages/approve-expenses/approve-expenses.component';
+import { ExpensesResolver } from 'src/app/resolvers/expenses.resolver';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'tables',         component: TablesComponent },
-    { path: 'save-income',         component: SaveIncomeComponent },
-    { path: 'save-expense',         component: SaveExpenseComponent },
-    { path: 'approve-incomes',         component: ApproveIncomesComponent, resolve: { incomes: IncomesResolver} },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'user-profile', component: UserProfileComponent },
+    { path: 'tables', component: TablesComponent },
+    { path: 'save-income', component: SaveIncomeComponent },
+    { path: 'save-expense', component: SaveExpenseComponent },
+    { path: 'approve-incomes',
+        component: ApproveIncomesComponent,
+        resolve: { incomes: IncomesResolver},
+        data: { roles: ['Admin', 'Moderator']}
+    },
+    { path: 'approve-expenses', component: ApproveExpensesComponent,
+        resolve: { expenses: ExpensesResolver}, data: { roles: ['Admin', 'Moderator']} }
 ];

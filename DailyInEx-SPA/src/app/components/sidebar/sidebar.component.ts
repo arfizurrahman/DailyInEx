@@ -12,8 +12,9 @@ export const ROUTES: RouteInfo[] = [
     { path: '/user-profile', title: 'User profile',  icon: 'ni-single-02 text-yellow', class: '' },
     { path: '/tables', title: 'Tables',  icon: 'ni-bullet-list-67 text-red', class: '' },
     { path: '/save-income', title: 'Save Income',  icon: 'ni-money-coins text-green', class: '' },
-    { path: '/save-expense', title: 'Save Expense',  icon: 'ni-money-coins text-red', class: '' },
-    { path: '/approve-incomes', title: 'Approve Incomes',  icon: 'ni-check-bold text-green', class: '' }
+    { path: '/save-expense', title: 'Save Expense',  icon: 'ni-money-coins text-red', class: '' }
+    // { path: '/approve-incomes', title: 'Approve Incomes',  icon: 'ni-check-bold text-green', class: '' },
+    // { path: '/approve-expenses', title: 'Approve Expenses',  icon: 'ni-check-bold text-red', class: '' }
 ];
 
 @Component({

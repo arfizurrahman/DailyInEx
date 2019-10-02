@@ -51,7 +51,9 @@ namespace DailyInEx.API.Controllers
         public async Task<IActionResult> ApprovePendingExpenses(ExpensesApproveDto expensesApproveDto)
         {
             var expensesToApprove = await _expenseRepo.GetPendingExpenses();
-            expensesToApprove = expensesToApprove.Where(i => expensesApproveDto.ExpenseIds.Contains(i.Id));
+            if(expensesApproveDto.ExpenseIds != null) {
+                expensesToApprove = expensesToApprove.Where(i => expensesApproveDto.ExpenseIds.Contains(i.Id));
+            }
             foreach(var expense in expensesToApprove)
             {
                 expense.IsApproved = true;
@@ -77,12 +79,16 @@ namespace DailyInEx.API.Controllers
 
         [Authorize(Policy = "RequiredAdminRole")]
         [HttpGet("PendingExpenses")]
-        public async Task<IActionResult> GetPendingExpenses()
+        public async Task<IActionResult> GetPendingExpenses([FromQuery] TableParams tableParams)
         {
-            var expensesFromRepo =  await _expenseRepo.GetPendingExpenses();
+            var expensesFromRepo =  await _expenseRepo.GetPendingExpenses(tableParams);
 
             var expensesToReturn = _mapper.Map<IEnumerable<ExpenseToReturnDto>>(expensesFromRepo);
 
+            Response.AddPagination(expensesFromRepo.CurrentPage, 
+                expensesFromRepo.PageSize, expensesFromRepo.TotalCount, 
+                expensesFromRepo.TotalPages);
+                
             return Ok(expensesToReturn);
         }
     }
