@@ -11,7 +11,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
     { path: '/save-income', title: 'Save Income',  icon: 'ni-money-coins text-green', class: '' },
     { path: '/save-expense', title: 'Save Expense',  icon: 'ni-money-coins text-red', class: '' },
-    { path: '/monthly-expenses', title: 'View Monthly Expenses',  icon: 'ni-bullet-list-67 text-green', class: '' }
+    { path: '/monthly-incomes', title: 'View Monthly Incomes',  icon: 'ni-bullet-list-67 text-green', class: '' },
+    { path: '/monthly-expenses', title: 'View Monthly Expenses',  icon: 'ni-bullet-list-67 text-red', class: '' }
     // { path: '/approve-incomes', title: 'Approve Incomes',  icon: 'ni-check-bold text-green', class: '' },
     // { path: '/approve-expenses', title: 'Approve Expenses',  icon: 'ni-check-bold text-red', class: '' }
 ];

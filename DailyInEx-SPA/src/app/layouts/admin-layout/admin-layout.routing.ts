@@ -11,6 +11,7 @@ import { ApproveExpensesComponent } from 'src/app/pages/approve-expenses/approve
 import { ExpensesResolver } from 'src/app/resolvers/expenses.resolver';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { MonthlyExpensesComponent } from 'src/app/pages/monthly-expenses/monthly-expenses.component';
+import { MonthlyIncomesComponent } from 'src/app/pages/monthly-incomes/monthly-incomes.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -19,6 +20,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'save-income', component: SaveIncomeComponent },
     { path: 'save-expense', component: SaveExpenseComponent },
     { path: 'monthly-expenses', component: MonthlyExpensesComponent },
+    { path: 'monthly-incomes', component: MonthlyIncomesComponent },
     { path: 'approve-incomes',
         component: ApproveIncomesComponent,
         resolve: { incomes: IncomesResolver},
