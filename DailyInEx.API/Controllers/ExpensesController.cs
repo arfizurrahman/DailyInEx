@@ -79,7 +79,7 @@ namespace DailyInEx.API.Controllers
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var monthYear = tableParams.Year + "-" + tableParams.Month; 
+            var monthYear = tableParams.Year + "-" + tableParams.Month.ToString("00"); 
             
             var expensesFromRepo = await _expenseRepo.GetMonthlyExpenses(userId, tableParams, monthYear);
 

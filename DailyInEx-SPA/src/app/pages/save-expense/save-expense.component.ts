@@ -70,7 +70,7 @@ export class SaveExpenseComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       }, () => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/monthly-expenses']);
       });
     }
   }

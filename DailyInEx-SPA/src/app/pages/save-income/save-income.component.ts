@@ -72,7 +72,7 @@ export class SaveIncomeComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       }, () => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/monthly-incomes']);
       });
     }
   }
