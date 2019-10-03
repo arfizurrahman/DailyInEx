@@ -10,5 +10,8 @@ namespace DailyInEx.API.Helpers
             get { return pageSize; }
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value; }
         }
+
+        public int Month { get; set; }
+        public int Year { get; set; }
     }
 }

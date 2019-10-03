@@ -10,6 +10,6 @@ namespace DailyInEx.API.Core.Repositories
          Task<Income> GetIncome(int id);
          Task<IEnumerable<Income>> GetPendingIncomes();
          Task<PagedList<Income>> GetPendingIncomes(TableParams tableParams);
-         Task<IEnumerable<Income>> GetMonthlyIncomes(int id, string monthYear);
+         Task<PagedList<Income>> GetMonthlyIncomes(int id, TableParams tableParams, string monthYear);
     }
 }

@@ -27,14 +27,14 @@ namespace DailyInEx.API.Persistence.Repositories
             return await _context.Incomes.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<IEnumerable<Income>> GetMonthlyIncomes(int id, string monthYear)
+        public async Task<PagedList<Income>> GetMonthlyIncomes(int id, TableParams tableParams, string monthYear)
         {
-            var incomes = await _context.Incomes
+            var incomes = _context.Incomes
                         .Where(i => i.Date.ToString()
                         .Contains(monthYear) && i.UserId == id && 
-                        i.IsApproved).ToListAsync();
-            return incomes;
-            
+                        i.IsApproved).OrderByDescending(e => e.Date);
+                        
+            return await PagedList<Income>.CreateAsync(incomes, tableParams.PageNumber, tableParams.PageSize);
         }
 
         public async Task<IEnumerable<Income>> GetPendingIncomes()

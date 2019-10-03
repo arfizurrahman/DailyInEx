@@ -71,9 +71,11 @@ namespace DailyInEx.API.Controllers
             var incomesFromRepo =  await _incomeRepo.GetPendingIncomes(tableParams);
 
             var incomesToReturn = _mapper.Map<IEnumerable<IncomeToReturnDto>>(incomesFromRepo);
+
             Response.AddPagination(incomesFromRepo.CurrentPage, 
                 incomesFromRepo.PageSize, incomesFromRepo.TotalCount, 
                 incomesFromRepo.TotalPages);
+                
             return Ok(incomesToReturn);
         }
 

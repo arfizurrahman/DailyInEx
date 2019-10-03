@@ -21,14 +21,14 @@ namespace DailyInEx.API.Persistence.Repositories
             return await _context.Expenses.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<IEnumerable<Expense>> GetMonthlyExpenses(int id, string monthYear)
+        public async Task<PagedList<Expense>> GetMonthlyExpenses(int id, TableParams tableParams, string monthYear)
         {
-            var expenses = await _context.Expenses
+            var expenses = _context.Expenses
                         .Where(i => i.Date.ToString()
                         .Contains(monthYear) && i.UserId == id && 
-                        i.IsApproved).ToListAsync();
-            return expenses;
+                        i.IsApproved).OrderByDescending(e => e.Date);
             
+            return await PagedList<Expense>.CreateAsync(expenses, tableParams.PageNumber, tableParams.PageSize);
         }
 
         public async Task<PagedList<Expense>> GetPendingExpenses(TableParams tableParams)

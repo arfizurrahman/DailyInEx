@@ -15,6 +15,7 @@ import { SaveIncomeComponent } from 'src/app/pages/save-income/save-income.compo
 import { SaveExpenseComponent } from 'src/app/pages/save-expense/save-expense.component';
 import { ApproveIncomesComponent } from './../../pages/approve-incomes/approve-incomes.component';
 import { ApproveExpensesComponent } from 'src/app/pages/approve-expenses/approve-expenses.component';
+import { MonthlyExpensesComponent } from 'src/app/pages/monthly-expenses/monthly-expenses.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ApproveExpensesComponent } from 'src/app/pages/approve-expenses/approve
     SaveIncomeComponent,
     SaveExpenseComponent,
     ApproveIncomesComponent,
-    ApproveExpensesComponent
+    ApproveExpensesComponent,
+    MonthlyExpensesComponent
   ]
 })
 

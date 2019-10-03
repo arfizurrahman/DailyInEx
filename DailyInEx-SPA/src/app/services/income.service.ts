@@ -5,6 +5,7 @@ import { Income } from '../models/income';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { PaginatedResult } from '../models/pagination';
+import { Expense } from '../models/expense';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,4 @@ export class IncomeService {
   saveIncome(userId: number, income: Income) {
     return this.http.post(this.baseUrl + 'users/' + userId + '/incomes', income);
   }
-
 }

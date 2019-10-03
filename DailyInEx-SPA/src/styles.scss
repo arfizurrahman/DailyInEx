@@ -27,3 +27,7 @@
 .card .table td, .card .table th {
 	text-align: center;
 }
+
+.low-height-select select{
+	height: calc(2.60rem + 2px);
+}

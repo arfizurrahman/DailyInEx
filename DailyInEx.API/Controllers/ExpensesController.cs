@@ -6,6 +6,7 @@ using AutoMapper;
 using DailyInEx.API.Core.Dtos;
 using DailyInEx.API.Core.Models;
 using DailyInEx.API.Core.Repositories;
+using DailyInEx.API.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DailyInEx.API.Controllers
@@ -73,14 +74,20 @@ namespace DailyInEx.API.Controllers
         // }
 
         [HttpGet("Monthly")]
-        public async Task<IActionResult> GetMonthlyExpenses(int userId, string monthYear)
+        public async Task<IActionResult> GetMonthlyExpenses(int userId, [FromQuery] TableParams tableParams)
         {
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            
-            var monthlyExpenses = await _expenseRepo.GetMonthlyExpenses(userId, monthYear);
 
-            var expensesToReturn = _mapper.Map<IEnumerable<ExpenseToReturnDto>>(monthlyExpenses);
+            var monthYear = tableParams.Year + "-" + tableParams.Month; 
+            
+            var expensesFromRepo = await _expenseRepo.GetMonthlyExpenses(userId, tableParams, monthYear);
+
+            var expensesToReturn = _mapper.Map<IEnumerable<ExpenseToReturnDto>>(expensesFromRepo);
+
+             Response.AddPagination(expensesFromRepo.CurrentPage, 
+                expensesFromRepo.PageSize, expensesFromRepo.TotalCount, 
+                expensesFromRepo.TotalPages);
 
             return Ok(expensesToReturn);
         }

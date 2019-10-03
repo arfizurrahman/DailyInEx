@@ -107,7 +107,8 @@
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col">Select</th>
+                  <th scope="col">SL</th>
+                  <th scope="col">Approve</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Cash/Check</th>
                   <th scope="col">Particular</th>
@@ -116,6 +117,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let expense of expenses">
+                  <td>{{  expenses.indexOf(expense)+1 }}</td>
                   <td>
                     <div class="custom-control custom-checkbox mb-3">
                       <input class="custom-control-input" [checked]="expenseIds.includes(expense.id)" [id]="'customCheck' + expense.id" [value]="expense.id" (change)="addToApprovalCollection(expense.id)" type="checkbox">
