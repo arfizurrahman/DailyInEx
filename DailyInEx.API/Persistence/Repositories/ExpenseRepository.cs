@@ -31,6 +31,16 @@ namespace DailyInEx.API.Persistence.Repositories
             return await PagedList<Expense>.CreateAsync(expenses, tableParams.PageNumber, tableParams.PageSize);
         }
 
+        public async Task<IEnumerable<Expense>> GetMonthlyExpensesForPdf(int id, string monthYear)
+        {
+            var expenses = await _context.Expenses
+                        .Where(i => i.Date.ToString()
+                        .Contains(monthYear) && i.UserId == id && 
+                        i.IsApproved).OrderByDescending(e => e.Date).ToListAsync();
+            
+            return expenses;
+        }
+
         public async Task<PagedList<Expense>> GetPendingExpenses(TableParams tableParams)
         {
             var expenses = _context.Expenses

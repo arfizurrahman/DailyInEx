@@ -112,7 +112,7 @@
                     <option value="5">May</option>
                     <option value="6">June</option>
                     <option value="7">July</option>
-                    <option value="8">Agust</option>
+                    <option value="8">August</option>
                     <option value="9">September</option>
                     <option value="10">October</option>
                     <option value="11">November</option>
@@ -177,7 +177,7 @@
           <div class="card-footer py-4" *ngIf="expenses.length > 0">
             <div class="d-flex justify-content-between mb-0">
                 <div>
-                    <button class="btn btn-primary" >Pdf</button>
+                    <button class="btn btn-primary" (click)="getMonthlyExpensesForPdf()">Pdf</button>
                 </div>
                 <ngb-pagination [collectionSize]="pagination.totalItems" 
                 [(page)]="pagination.currentPage" 

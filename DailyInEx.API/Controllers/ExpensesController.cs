@@ -85,9 +85,24 @@ namespace DailyInEx.API.Controllers
 
             var expensesToReturn = _mapper.Map<IEnumerable<ExpenseToReturnDto>>(expensesFromRepo);
 
-             Response.AddPagination(expensesFromRepo.CurrentPage, 
+            Response.AddPagination(expensesFromRepo.CurrentPage, 
                 expensesFromRepo.PageSize, expensesFromRepo.TotalCount, 
                 expensesFromRepo.TotalPages);
+
+            return Ok(expensesToReturn);
+        }
+
+        [HttpGet("MonthlyPdf")]
+        public async Task<IActionResult> GetMonthlyExpensesForPdf(int userId, int month, int year)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var monthYear = year + "-" + month.ToString("00"); 
+            
+            var expensesFromRepo = await _expenseRepo.GetMonthlyExpensesForPdf(userId, monthYear);
+
+            var expensesToReturn = _mapper.Map<IEnumerable<ExpenseToReturnDto>>(expensesFromRepo);
 
             return Ok(expensesToReturn);
         }

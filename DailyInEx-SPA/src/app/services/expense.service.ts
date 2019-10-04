@@ -41,4 +41,12 @@ export class ExpenseService {
         })
       );
   }
+
+  getMonthlyExpensesForPdf(userId: number, model) {
+    let params = new HttpParams();
+
+    params = params.append('month', model.month);
+    params = params.append('year', model.year);
+    return this.http.get<Expense[]>(this.baseUrl + 'users/' + userId + '/expenses/monthly', { params });
+  }
 }
