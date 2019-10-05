@@ -93,6 +93,21 @@ namespace DailyInEx.API.Controllers
             return Ok(incomesToReturn);
         }
 
+        [HttpGet("MonthlyPdf")]
+        public async Task<IActionResult> GetMonthlyIncomesForPdf(int userId, int month, int year)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var monthYear = year + "-" + month.ToString("00"); 
+            
+            var incomesFromRepo = await _incomeRepo.GetMonthlyIncomesForPdf(userId, monthYear);
+
+            var incomesToReturn = _mapper.Map<IEnumerable<IncomeToReturnDto>>(incomesFromRepo);
+
+            return Ok(incomesToReturn);
+        }
+
         // [HttpPost("Approve")]
         // public async Task<IActionResult> ApprovePendingIncomes(int userId, IncomesApproveDto incomesApproveDto)
         // {

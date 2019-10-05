@@ -51,5 +51,15 @@ namespace DailyInEx.API.Persistence.Repositories
 
             return await PagedList<Income>.CreateAsync(incomes, tableParams.PageNumber, tableParams.PageSize);
         }
+
+        public async Task<IEnumerable<Income>> GetMonthlyIncomesForPdf(int id, string monthYear)
+        {
+            var expenses = await _context.Incomes
+                        .Where(i => i.Date.ToString()
+                        .Contains(monthYear) && i.UserId == id && 
+                        i.IsApproved).OrderByDescending(e => e.Date).ToListAsync();
+            
+            return expenses;
+        }
     }
 }

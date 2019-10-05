@@ -34,9 +34,9 @@ namespace DailyInEx.API.Persistence.Repositories
         public async Task<IEnumerable<Expense>> GetMonthlyExpensesForPdf(int id, string monthYear)
         {
             var expenses = await _context.Expenses
-                        .Where(i => i.Date.ToString()
-                        .Contains(monthYear) && i.UserId == id && 
-                        i.IsApproved).OrderByDescending(e => e.Date).ToListAsync();
+                        .Where(e => e.Date.ToString()
+                        .Contains(monthYear) && e.UserId == id && 
+                        e.IsApproved).OrderByDescending(e => e.Date).ToListAsync();
             
             return expenses;
         }

@@ -41,4 +41,12 @@ export class IncomeService {
         })
       );
   }
+
+  getMonthlyIncomesForPdf(userId: number, model) {
+    let params = new HttpParams();
+
+    params = params.append('month', model.month);
+    params = params.append('year', model.year);
+    return this.http.get<Income[]>(this.baseUrl + 'users/' + userId + '/incomes/monthlyPdf', { params });
+  }
 }

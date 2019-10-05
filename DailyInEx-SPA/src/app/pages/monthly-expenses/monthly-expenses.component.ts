@@ -22,6 +22,7 @@ export class MonthlyExpensesComponent implements OnInit {
   currentPage: any;
   model: any = { year: '', month: '' };
   base64Image = '';
+  showClicked = false;
 
   constructor(private alertify: AlertifyService,
               private expenseService: ExpenseService,
@@ -45,6 +46,7 @@ export class MonthlyExpensesComponent implements OnInit {
       this.pagination.itemsPerPage).subscribe((res: PaginatedResult<Expense[]>) => {
         this.expenses = res.result;
         this.pagination = res.pagination;
+        this.showClicked = true;
       }, error => {
         this.alertify.error(error);
       });
@@ -74,7 +76,7 @@ export class MonthlyExpensesComponent implements OnInit {
                 { text: this.datePipe.transform(element.date, 'longDate'), style: '', alignment: 'center'},
                 { text: element.amount.toString(), style: '', alignment: 'center'},
                 { text: element.isCash ? 'Cash' : 'Check' , style: '', alignment: 'center'},
-                { text: element.particular, style: '', alignment: 'center'},
+                { text: element.particular ? element.particular : 'N/A', style: '', alignment: 'center'},
                 { text: checkDetails, style: '', alignment: 'center'}];
       expensesToWrite.push(row);
     });
@@ -117,7 +119,7 @@ export class MonthlyExpensesComponent implements OnInit {
           //   ]
           // }
       ],
-    footer: function(currentPage, pageCount){
+    footer: function(currentPage, pageCount) {
       return {
           columns: [
             {text: currentPage.toString() + ' of ' + pageCount, alignment: 'left'},
@@ -173,7 +175,7 @@ export class MonthlyExpensesComponent implements OnInit {
  }
 
  getMonthNameByNumber(monthNo: number) {
-   let months = ['Janunary', 'February', 'March', 'April', 'May', 'June',
+   const months = ['Janunary', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'];
    return months[monthNo - 1];
  }
@@ -181,7 +183,7 @@ export class MonthlyExpensesComponent implements OnInit {
  getBase64ImageFromURL(url: string) {
   return Observable.create((observer: Observer<string>) => {
     // create an image object
-    let img = new Image();
+    const img = new Image();
     img.crossOrigin = 'Anonymous';
     img.src = url;
     if (!img.complete) {

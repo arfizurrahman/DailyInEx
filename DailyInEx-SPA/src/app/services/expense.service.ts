@@ -47,6 +47,6 @@ export class ExpenseService {
 
     params = params.append('month', model.month);
     params = params.append('year', model.year);
-    return this.http.get<Expense[]>(this.baseUrl + 'users/' + userId + '/expenses/monthly', { params });
+    return this.http.get<Expense[]>(this.baseUrl + 'users/' + userId + '/expenses/monthlyPdf', { params });
   }
 }

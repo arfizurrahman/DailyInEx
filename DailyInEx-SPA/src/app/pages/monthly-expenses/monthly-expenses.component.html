@@ -147,10 +147,11 @@
                   <button type="submit" [disabled]="!monthExpenseSearchForm.valid" class="btn btn-primary mb-2">Show</button>
                 </form>
           </div>
-          <p class="text-center" *ngIf="expenses.length === 0">
-            No expenses available
+          <p class="text-center mb-4" *ngIf="expenses.length === 0 && showClicked">
+            No records available
           </p>
           <div class="table-responsive"  *ngIf="expenses.length > 0">
+            <p class="ml-4">{{ expenses.length }} record<span *ngIf="expenses.length > 1">s</span> found</p>
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
@@ -168,7 +169,7 @@
                   <td>{{expense.date | date : 'longDate'}}</td>
                   <td>{{ expense.amount }}</td>
                   <td><span *ngIf="expense.isCash">Cash</span><span *ngIf="expense.isCheck">Check</span></td>
-                  <td>{{expense.particular }}</td>
+                  <td><span *ngIf="expense.particular">{{expense.particular}}</span><span *ngIf="!expense.particular">N/A</span></td>
                   <td><span *ngIf="expense.isCheck">Check No: {{expense.checkNo}} - Bank: {{expense.bankName}}</span><span *ngIf="expense.isCash">N/A</span></td>
                 </tr>
               </tbody>

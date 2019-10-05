@@ -12,6 +12,5 @@ namespace DailyInEx.API.Core.Repositories
          Task<IEnumerable<Expense>> GetPendingExpenses();
          Task<PagedList<Expense>> GetMonthlyExpenses(int id, TableParams tableParams, string monthYear);
          Task<IEnumerable<Expense>> GetMonthlyExpensesForPdf(int id, string monthYear);
-
     }
 }

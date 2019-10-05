@@ -112,7 +112,7 @@
                     <option value="5">May</option>
                     <option value="6">June</option>
                     <option value="7">July</option>
-                    <option value="8">Agust</option>
+                    <option value="8">August</option>
                     <option value="9">September</option>
                     <option value="10">October</option>
                     <option value="11">November</option>
@@ -147,10 +147,11 @@
                   <button type="submit" [disabled]="!monthlyIncomesSearchForm.valid" class="btn btn-primary mb-2">Show</button>
                 </form>
           </div>
-          <p class="text-center" *ngIf="incomes.length === 0">
-            No incomes available
+          <p class="text-center mb-4" *ngIf="incomes.length === 0 && showClicked">
+            No records found
           </p>
           <div class="table-responsive"  *ngIf="incomes.length > 0">
+              <p class="ml-4">{{ incomes.length }} record<span *ngIf="incomes.length > 1">s</span> found</p>
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
@@ -168,7 +169,7 @@
                   <td>{{income.date | date : 'longDate'}}</td>
                   <td>{{ income.amount }}</td>
                   <td><span *ngIf="income.isCash">Cash</span><span *ngIf="income.isCheck">Check</span></td>
-                  <td>{{income.particular }}</td>
+                  <td><span *ngIf="income.particular">{{income.particular}}</span><span *ngIf="!income.particular">N/A</span></td>
                   <td><span *ngIf="income.isCheck">Check No: {{income.checkNo}} - Bank: {{income.bankName}}</span><span *ngIf="income.isCash">N/A</span></td>
                 </tr>
               </tbody>
@@ -176,9 +177,9 @@
           </div>
           <div class="card-footer py-4" *ngIf="incomes.length > 0">
             <div class="d-flex justify-content-between mb-0">
-                <div>
-                    <button class="btn btn-primary" >Pdf</button>
-                </div>
+              <div>
+                <button class="btn btn-primary" (click)="getMonthlyIncomesForPdf()">Pdf</button>
+            </div>
                 <ngb-pagination [collectionSize]="pagination.totalItems" 
                 [(page)]="pagination.currentPage" 
                 [boundaryLinks]="true"
