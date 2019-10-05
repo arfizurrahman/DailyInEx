@@ -73,7 +73,7 @@ export class MonthlyExpensesComponent implements OnInit {
     this.expensesForPdf.forEach(element => {
       let checkDetails = element.isCheck ? 'Check No: ' + element.checkNo + ' - ' + element.bankName : 'N/A';
       let row = [{text: (count++).toString(), style: '', alignment: 'center'},
-                { text: this.datePipe.transform(element.date, 'longDate'), style: '', alignment: 'center'},
+                { text: this.datePipe.transform(element.date, 'mediumDate'), style: '', alignment: 'center'},
                 { text: element.amount.toString(), style: '', alignment: 'center'},
                 { text: element.isCash ? 'Cash' : 'Check' , style: '', alignment: 'center'},
                 { text: element.particular ? element.particular : 'N/A', style: '', alignment: 'center'},
@@ -107,8 +107,9 @@ export class MonthlyExpensesComponent implements OnInit {
         {
             style: 'tableExample',
             table: {
+              heights: 15,
               headerRows: 1,
-              widths: [15, 110, 70, 70, 90, 90],
+              widths: [15, 90, 70, 70, 90, 110],
               body: expensesToWrite
             }
           }
@@ -150,14 +151,15 @@ export class MonthlyExpensesComponent implements OnInit {
         },
         tableHeader: {
           bold: true,
-          color: 'black'
+          color: 'black',
+          fontSize: 12
         }
       },
       pageSize: 'A4',
       pageMargins: [ 50, 60, 50, 60 ]
     };
 
-    this.pdfGeneratorService.pdfMake.createPdf( dd ).open();
+    this.pdfGeneratorService.pdfMake.createPdf( dd ).download('Monthly-Expense-Report-' + currentDate + '.pdf');
   }
 
   getBase64Image(img: HTMLImageElement) {
