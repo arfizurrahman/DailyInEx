@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 declare interface RouteInfo {
     path: string;
@@ -9,10 +10,11 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-    { path: '/save-income', title: 'Save Income',  icon: 'ni-money-coins text-primary', class: '' },
+    { path: '/save-income', title: 'Save Income',  icon: 'ni-money-coins text-green', class: '' },
     { path: '/save-expense', title: 'Save Expense',  icon: 'ni-money-coins text-red', class: '' },
-    { path: '/monthly-incomes', title: 'View Monthly Incomes',  icon: 'ni-bullet-list-67 text-yellow', class: '' },
-    { path: '/monthly-expenses', title: 'View Monthly Expenses',  icon: 'ni-bullet-list-67 text-primary', class: '' }
+    { path: '/monthly-incomes', title: 'View Monthly Incomes',  icon: 'fas fa-chart-bar text-yellow', class: '' },
+    { path: '/monthly-expenses', title: 'View Monthly Expenses',  icon: 'fas fa-chart-bar text-primary', class: '' },
+    { path: '/yearly-profit', title: 'Yearly Profit Report',  icon: 'ni-chart-pie-35 text-yellow', class: '' }
     // { path: '/approve-incomes', title: 'Approve Incomes',  icon: 'ni-check-bold text-green', class: '' },
     // { path: '/approve-expenses', title: 'Approve Expenses',  icon: 'ni-check-bold text-red', class: '' }
 ];
@@ -27,7 +29,7 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);

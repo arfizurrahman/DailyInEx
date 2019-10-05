@@ -4,6 +4,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +15,7 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
+
   constructor(location: Location,  private element: ElementRef, private authService: AuthService,
               private alertify: AlertifyService,
               private router: Router) {
@@ -27,12 +29,12 @@ export class NavbarComponent implements OnInit {
   }
 getTitle() {
     let titlee = this.location.prepareExternalUrl(this.location.path());
-    if(titlee.charAt(0) === '#'){
+    if (titlee.charAt(0) === '#') {
         titlee = titlee.slice( 1 );
     }
 
-    for(let item = 0; item < this.listTitles.length; item++){
-        if(this.listTitles[item].path === titlee) {
+    for (let item = 0; item < this.listTitles.length; item++) {
+        if (this.listTitles[item].path === titlee) {
             return this.listTitles[item].title;
         }
     }

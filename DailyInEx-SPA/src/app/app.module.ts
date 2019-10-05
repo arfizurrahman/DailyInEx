@@ -21,6 +21,7 @@ import { IncomesResolver } from './resolvers/incomes.resolver';
 import { ExpensesResolver } from './resolvers/expenses.resolver';
 import { PdfGeneratorService } from './services/pdf-generator.service';
 import { DatePipe } from '@angular/common';
+import { ProfitService } from './services/profit.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -53,6 +54,7 @@ export function tokenGetter() {
   providers: [
     AuthService,
     IncomeService,
+    ProfitService,
     ErrorInterceptorProvider,
     IncomesResolver,
     ExpensesResolver,
