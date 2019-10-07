@@ -49,4 +49,12 @@ export class IncomeService {
     params = params.append('year', model.year);
     return this.http.get<Income[]>(this.baseUrl + 'users/' + userId + '/incomes/monthlyPdf', { params });
   }
+
+  getRecentIncomes(userId: number, itemCount: number) {
+    return this.http.get<Income[]>(this.baseUrl + 'users/' + userId + '/incomes/recent?count=' + itemCount);
+  }
+
+  getTotalIncomeOfCurrentMonth(userId: number) {
+    return this.http.get<Income>(this.baseUrl + 'users/' + userId + '/incomes/currentMonthsIncome');
+  }
 }

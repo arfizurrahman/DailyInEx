@@ -49,4 +49,12 @@ export class ExpenseService {
     params = params.append('year', model.year);
     return this.http.get<Expense[]>(this.baseUrl + 'users/' + userId + '/expenses/monthlyPdf', { params });
   }
+
+  getRecentExpenses(userId: number, itemCount: number) {
+    return this.http.get<Expense[]>(this.baseUrl + 'users/' + userId + '/expenses/recent?count=' + itemCount);
+  }
+
+  getTotalExpenseOfCurrentMonth(userId: number) {
+    return this.http.get<Expense>(this.baseUrl + 'users/' + userId + '/expenses/currentMonthsExpense');
+  }
 }

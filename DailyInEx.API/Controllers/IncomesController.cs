@@ -108,6 +108,33 @@ namespace DailyInEx.API.Controllers
             return Ok(incomesToReturn);
         }
 
+        [HttpGet("Recent")]
+        public async Task<IActionResult> GetRecentIncomes(int userId, int count)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var incomesFromRepo = await _incomeRepo.GetRecentIncomes(userId, count);
+
+            var incomesToReturn = _mapper.Map<IEnumerable<IncomeToReturnDto>>(incomesFromRepo);
+
+            return Ok(incomesToReturn);
+        }
+
+        [HttpGet("CurrentMonthsIncome")]
+        public async Task<IActionResult> GetTotalIncomeOfCurrentMonth(int userId)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var incomeAmount = await _incomeRepo.GetTotalIncomeOfCurrentMonth(userId);
+            var incomeToReturn = new IncomeToReturnDto{
+                Amount = incomeAmount
+            };
+
+            return Ok(incomeToReturn);
+        }
+
         // [HttpPost("Approve")]
         // public async Task<IActionResult> ApprovePendingIncomes(int userId, IncomesApproveDto incomesApproveDto)
         // {

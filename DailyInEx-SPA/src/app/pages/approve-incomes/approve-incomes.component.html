@@ -135,8 +135,8 @@
         <div class="card-footer py-4" *ngIf="incomes.length > 0">
           <div class="d-flex justify-content-between mb-0">
               <div>
-                  <button class="btn btn-primary" (click)="approveSelectedIncomes()">Approve</button>
-                  <button class="btn btn-primary" (click)="approveAllIncomes()">Approve All</button>
+                  <button class="btn btn-primary mb-1" (click)="approveSelectedIncomes()">Approve</button>
+                  <button class="btn btn-primary mb-1" (click)="approveAllIncomes()">Approve All</button>
               </div>
               <ngb-pagination [collectionSize]="pagination.totalItems" 
               [(page)]="pagination.currentPage" 

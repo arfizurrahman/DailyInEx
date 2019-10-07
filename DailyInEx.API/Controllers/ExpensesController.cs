@@ -106,5 +106,32 @@ namespace DailyInEx.API.Controllers
 
             return Ok(expensesToReturn);
         }
+
+        [HttpGet("Recent")]
+        public async Task<IActionResult> GetRecentExpenses(int userId, int count)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var expensesFromRepo = await _expenseRepo.GetRecentExpenses(userId, count);
+
+            var expensesToReturn = _mapper.Map<IEnumerable<ExpenseToReturnDto>>(expensesFromRepo);
+
+            return Ok(expensesToReturn);
+        }
+
+        [HttpGet("CurrentMonthsExpense")]
+        public async Task<IActionResult> GetTotalExpenseOfCurrentMonth(int userId)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var expenseAmount = await _expenseRepo.GetTotalExpenseOfCurrentMonth(userId);
+            var expenseToReturn = new ExpenseToReturnDto{
+                Amount = expenseAmount
+            };
+
+            return Ok(expenseToReturn);
+        }
     }
 }

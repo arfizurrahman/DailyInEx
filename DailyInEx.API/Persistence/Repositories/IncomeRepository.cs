@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,6 +38,15 @@ namespace DailyInEx.API.Persistence.Repositories
             return await PagedList<Income>.CreateAsync(incomes, tableParams.PageNumber, tableParams.PageSize);
         }
 
+        public async Task<IEnumerable<Income>> GetRecentIncomes(int id,int count)
+        {
+            var incomes = await _context.Incomes
+                        .Where(i => i.UserId == id && 
+                        i.IsApproved).OrderByDescending(e => e.Date).Take(count).ToListAsync();
+                        
+            return incomes;
+        }
+
         public async Task<IEnumerable<Income>> GetPendingIncomes()
         {
             var incomes = await _context.Incomes
@@ -54,12 +64,21 @@ namespace DailyInEx.API.Persistence.Repositories
 
         public async Task<IEnumerable<Income>> GetMonthlyIncomesForPdf(int id, string monthYear)
         {
-            var expenses = await _context.Incomes
+            var incomes = await _context.Incomes
                         .Where(i => i.Date.ToString()
                         .Contains(monthYear) && i.UserId == id && 
                         i.IsApproved).OrderByDescending(e => e.Date).ToListAsync();
             
-            return expenses;
+            return incomes;
+        }
+
+        public async Task<double> GetTotalIncomeOfCurrentMonth(int id)
+        {
+            var incomeAmount = await _context.Incomes.
+                        Where(i => i.UserId == id && i.IsApproved 
+                        && i.Date.ToString().Contains(DateTime.Now.Year + "-" + DateTime.Now.Month)).SumAsync(i => i.Amount);
+            
+            return incomeAmount;
         }
     }
 }

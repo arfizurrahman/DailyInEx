@@ -11,7 +11,7 @@
     </a>
     <!-- User -->
     <ul class="nav align-items-center d-md-none">
-      <li class="nav-item" ngbDropdown placement="bottom-right">
+      <!-- <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link nav-link-icon" role="button" ngbDropdownToggle>
           <i class="ni ni-bell-55"></i>
         </a>
@@ -21,12 +21,12 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
         </div>
-      </li>
+      </li> -->
       <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link" role="button" ngbDropdownToggle>
           <div class="media align-items-center">
             <span class="avatar avatar-sm rounded-circle">
-              <img alt="Image placeholder" src="./assets/img/theme/team-1-800x800.jpg">
+              <img alt="Image placeholder" src="./assets/img/theme/nerd-castle-trans-backgr2.png">
             </span>
           </div>
         </a>
@@ -34,7 +34,7 @@
           <div class=" dropdown-header noti-title">
             <h6 class="text-overflow m-0">Welcome!</h6>
           </div>
-          <a routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
+          <!-- <a routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
             <i class="ni ni-single-02"></i>
             <span>My profile</span>
           </a>
@@ -49,9 +49,9 @@
           <a routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
             <i class="ni ni-support-16"></i>
             <span>Support</span>
-          </a>
+          </a> -->
           <div class="dropdown-divider"></div>
-          <a href="#!" class="dropdown-item">
+          <a href="#!" (click)="logout()" class="dropdown-item">
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
           </a>
@@ -77,7 +77,7 @@
         </div>
       </div>
       <!-- Form -->
-      <form class="mt-4 mb-3 d-md-none">
+      <!-- <form class="mt-4 mb-3 d-md-none">
         <div class="input-group input-group-rounded input-group-merge">
           <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
           <div class="input-group-prepend">
@@ -86,7 +86,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </form> -->
       <!-- Navigation -->
       <ul class="navbar-nav">
           <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">

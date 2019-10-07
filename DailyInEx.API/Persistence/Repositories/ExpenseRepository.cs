@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -54,6 +55,24 @@ namespace DailyInEx.API.Persistence.Repositories
             var expenses = await _context.Expenses
                         .Where(i => !i.IsApproved).ToListAsync();
             return expenses;
+        }
+
+        public async Task<IEnumerable<Expense>> GetRecentExpenses(int id, int count)
+        {
+           var expenses = await _context.Expenses
+                        .Where(e => e.UserId == id && 
+                        e.IsApproved).OrderByDescending(e => e.Date).Take(count).ToListAsync();
+            
+            return expenses;
+        }
+
+        public async Task<double> GetTotalExpenseOfCurrentMonth(int id)
+        {
+            var expenseAmount = await _context.Expenses.
+                        Where(i => i.UserId == id && i.IsApproved 
+                        && i.Date.ToString().Contains(DateTime.Now.Year + "-" + DateTime.Now.Month)).SumAsync(i => i.Amount);
+            
+            return expenseAmount;
         }
     }
 }
