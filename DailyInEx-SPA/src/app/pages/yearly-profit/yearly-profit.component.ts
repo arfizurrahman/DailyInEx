@@ -18,6 +18,7 @@ export class YearlyProfitComponent implements OnInit {
   yearlyIncome = 0;
   yearlyExpense = 0;
   yearlyProfit = 0;
+  profitExists = false;
 
   constructor(private alertify: AlertifyService,
               private profitService: ProfitService,
@@ -36,6 +37,9 @@ export class YearlyProfitComponent implements OnInit {
         this.yearlyIncome += element.income;
         this.yearlyExpense += element.expense;
         this.yearlyProfit += element.totalProfit;
+        if (element.totalProfit > 0) {
+          this.profitExists = true;
+        }
       });
       this.showClicked = true;
     }, error => {
