@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PdfGeneratorService } from 'src/app/services/pdf-generator.service';
 import { DatePipe } from '@angular/common';
 import { Observable, Observer } from 'rxjs';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-monthly-expenses',
@@ -23,6 +24,7 @@ export class MonthlyExpensesComponent implements OnInit {
   model: any = { year: '', month: '' };
   base64Image = '';
   showClicked = false;
+  currentUser: User;
 
   constructor(private alertify: AlertifyService,
               private expenseService: ExpenseService,
@@ -34,6 +36,7 @@ export class MonthlyExpensesComponent implements OnInit {
   ngOnInit() {
     this.pagination.currentPage = this.pageNumber;
     this.pagination.itemsPerPage = this.pageSize;
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
   }
 
   pageChanged(event: any): void {
@@ -89,7 +92,7 @@ export class MonthlyExpensesComponent implements OnInit {
 
     const dd = {
       content: [
-        {text: 'Nerd Castle Ltd.', style: 'header', alignment: 'center'},
+        {text: this.currentUser.name, style: 'header', alignment: 'center'},
         {text: 'Monthly Expense Report', style: 'subheader', alignment: 'center'},
         {
           text: [

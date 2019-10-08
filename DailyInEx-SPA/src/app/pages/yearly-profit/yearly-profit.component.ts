@@ -1,3 +1,4 @@
+import { User } from 'src/app/models/user';
 import { Profit } from './../../models/profit';
 import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from 'src/app/services/alertify.service';
@@ -19,6 +20,7 @@ export class YearlyProfitComponent implements OnInit {
   yearlyExpense = 0;
   yearlyProfit = 0;
   profitExists = false;
+  currentUser: User;
 
   constructor(private alertify: AlertifyService,
               private profitService: ProfitService,
@@ -27,6 +29,7 @@ export class YearlyProfitComponent implements OnInit {
               private datePipe: DatePipe) {}
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
   }
 
   getYearlyProfits() {
@@ -76,7 +79,7 @@ export class YearlyProfitComponent implements OnInit {
 
     const dd = {
       content: [
-        {text: 'Nerd Castle Ltd.', style: 'header', alignment: 'center'},
+        {text: this.currentUser.name, style: 'header', alignment: 'center'},
         {text: 'Yearly Income Expense Report', style: 'subheader', alignment: 'center'},
         {
           text: [

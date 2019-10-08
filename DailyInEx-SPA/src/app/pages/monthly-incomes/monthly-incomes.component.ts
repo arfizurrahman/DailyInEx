@@ -1,3 +1,4 @@
+import { User } from './../../models/user';
 import { Component, OnInit } from '@angular/core';
 import { Income } from 'src/app/models/income';
 import { Pagination, PaginatedResult } from 'src/app/models/pagination';
@@ -23,6 +24,7 @@ export class MonthlyIncomesComponent implements OnInit {
   model: any = { year: '', month: '' };
   base64Image = '';
   showClicked = false;
+  currentUser: User;
 
   constructor(private alertify: AlertifyService,
               private incomeService: IncomeService,
@@ -33,6 +35,7 @@ export class MonthlyIncomesComponent implements OnInit {
   ngOnInit() {
     this.pagination.currentPage = this.pageNumber;
     this.pagination.itemsPerPage = this.pageSize;
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
   }
 
   pageChanged(event: any): void {
@@ -88,7 +91,7 @@ generatePdf() {
 
   const dd = {
     content: [
-      {text: 'Nerd Castle Ltd.', style: 'header', alignment: 'center'},
+      {text: this.currentUser.name, style: 'header', alignment: 'center'},
       {text: 'Monthly Income Report', style: 'subheader', alignment: 'center'},
       {
         text: [
