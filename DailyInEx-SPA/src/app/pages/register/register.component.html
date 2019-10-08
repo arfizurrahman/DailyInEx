@@ -458,7 +458,7 @@
                     registerForm.get('password').touched
                   "
                 >
-                  Password must be atleast 6 characters
+                  Password must be atleast 8 characters
                 </div>
                 <div
                   class="invalid-feedback"
@@ -467,7 +467,16 @@
                     registerForm.get('password').touched
                   "
                 >
-                  Password cannot exceed 10 characters
+                  Password cannot exceed 20 characters
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    registerForm.get('password').hasError('pattern') &&
+                    registerForm.get('password').touched
+                  "
+                >
+                  Password must contain one number, one uppercase, one lowercase letter, one special character
                 </div>
               </div>
             </div>

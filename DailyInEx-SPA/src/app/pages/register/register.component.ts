@@ -29,7 +29,8 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
       country: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
+                     Validators.pattern('(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=.*[@$!%*?&])(?=[^0-9]*[0-9]).{8,20}')]],
       confirmPassword: ['', Validators.required],
       customCheckRegister: ['', Validators.required]
     }, {validator: this.passwordMatchValidator});
