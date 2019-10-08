@@ -76,9 +76,7 @@ export class DashboardComponent implements OnInit {
       this.profits = profits;
       this.profits.forEach(element => {
         this.dataset.push(element.totalProfit);
-        this.profitOfCurrentYear += element.totalProfit;
       });
-      this.profitOfCurrentMonth = this.profits.find(p => p.month === (new Date().getMonth() + 1)).totalProfit;
       let dataRecentProfits = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [
