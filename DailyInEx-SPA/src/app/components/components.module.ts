@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HasRoleDirective } from '../directives/hasRole.directive';
+import { DashboardSummaryComponent } from './dashboard-summary/dashboard-summary.component';
 
 @NgModule({
   imports: [
@@ -18,11 +19,13 @@ import { HasRoleDirective } from '../directives/hasRole.directive';
     NavbarComponent,
     HasRoleDirective,
     SidebarComponent,
+    DashboardSummaryComponent
   ],
   exports: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    DashboardSummaryComponent
   ]
 })
 export class ComponentsModule { }

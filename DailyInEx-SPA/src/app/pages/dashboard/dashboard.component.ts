@@ -66,8 +66,6 @@ export class DashboardComponent implements OnInit {
     parseOptions(Chart, chartOptions());
 
     this.getYearlyProfits();
-    this.getTotalIncomeOfCurrentMonth();
-    this.getTotalExpenseOfCurrentMonth();
   }
 
 
@@ -81,7 +79,6 @@ export class DashboardComponent implements OnInit {
         this.profitOfCurrentYear += element.totalProfit;
       });
       this.profitOfCurrentMonth = this.profits.find(p => p.month === (new Date().getMonth() + 1)).totalProfit;
-      console.log(this.profitOfCurrentYear);
       let dataRecentProfits = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [
@@ -115,24 +112,6 @@ export class DashboardComponent implements OnInit {
     this.incomeService.getRecentIncomes(this.authService.decodedToken.nameid, this.itemCount)
     .subscribe(incomes => {
         this.incomes = incomes;
-      }, error => {
-        this.alertify.error(error);
-      });
-  }
-
-  getTotalIncomeOfCurrentMonth() {
-    this.incomeService.getTotalIncomeOfCurrentMonth(this.authService.decodedToken.nameid)
-    .subscribe(income => {
-      this.incomeOfCurrentMonth = income.amount;
-      }, error => {
-        this.alertify.error(error);
-      });
-  }
-
-  getTotalExpenseOfCurrentMonth() {
-    this.expenseService.getTotalExpenseOfCurrentMonth(this.authService.decodedToken.nameid)
-    .subscribe(expense => {
-      this.expenseOfCurrentMonth = expense.amount + 0;
       }, error => {
         this.alertify.error(error);
       });

@@ -42,8 +42,13 @@ namespace DailyInEx.API.Controllers
         {
             userForRegisterDto.UserName = userForRegisterDto.Email;
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
-
+           
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
+            await _userManager.AddToRoleAsync(userToCreate, "Member");
+            var userRole = new UserRole {
+                UserId = userToCreate.Id,
+                RoleId = 1
+            };
 
             var userToReturn = _mapper.Map<UserToReturnDto>(userToCreate);
 

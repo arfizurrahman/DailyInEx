@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
+  currentUser: User;
 
   constructor(location: Location,  private element: ElementRef, private authService: AuthService,
               private alertify: AlertifyService,
@@ -26,6 +27,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
   }
 getTitle() {
     let titlee = this.location.prepareExternalUrl(this.location.path());

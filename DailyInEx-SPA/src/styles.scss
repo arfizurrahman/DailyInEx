@@ -31,3 +31,15 @@
 .low-height-select select{
 	height: calc(2.60rem + 2px);
 }
+
+.no-records {
+	text-align: center;
+	img {
+		width: 50px;
+		margin-bottom: 7px;
+	}
+	p {
+		font-weight: 400;
+		margin-bottom: 5px;
+	}
+}
