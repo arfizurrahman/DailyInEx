@@ -63,7 +63,7 @@ export class ApproveIncomesComponent implements OnInit {
           this.incomes.splice(this.incomes.findIndex(i => i.id === element), 1);
         });
         this.getIncomesForApproval();
-        this.alertify.success("Income(s) approved successfully");
+        this.alertify.success('Income(s) approved successfully');
       }, error => {
         this.alertify.error(error);
       });
@@ -75,7 +75,7 @@ export class ApproveIncomesComponent implements OnInit {
       this.adminService.approveAllIncomes().subscribe(() => {
         this.incomeIds = [];
         this.getIncomesForApproval();
-        this.alertify.success("Incomes approved successfully");
+        this.alertify.success('Incomes approved successfully');
       }, error => {
         this.alertify.error(error);
       });
