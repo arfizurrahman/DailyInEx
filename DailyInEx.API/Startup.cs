@@ -1,13 +1,17 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using AutoMapper;
 using DailyInEx.API.Core.Models;
 using DailyInEx.API.Core.Repositories;
+using DailyInEx.API.Helpers;
 using DailyInEx.API.Persistence;
 using DailyInEx.API.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -90,6 +94,17 @@ namespace DailyInEx.API
             }
             else
             {
+                app.UseExceptionHandler(builder => {
+                    builder.Run(async context => {
+                        context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if(error != null){
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                });
                 //app.UseHsts();
             }
 
