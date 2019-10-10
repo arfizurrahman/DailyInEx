@@ -61,6 +61,7 @@ export class ApproveIncomesComponent implements OnInit {
       this.adminService.approveSelectedIncomes(this.incomeIds).subscribe(() => {
         this.incomeIds.forEach(element => {
           this.incomes.splice(this.incomes.findIndex(i => i.id === element), 1);
+          this.incomeIds = [];
         });
         this.getIncomesForApproval();
         this.alertify.success('Income(s) approved successfully');

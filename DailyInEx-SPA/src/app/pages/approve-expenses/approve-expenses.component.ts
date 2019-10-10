@@ -61,9 +61,10 @@ export class ApproveExpensesComponent implements OnInit {
       this.adminService.approveSelectedExpenses(this.expenseIds).subscribe(() => {
         this.expenseIds.forEach(element => {
           this.expenses.splice(this.expenses.findIndex(i => i.id === element), 1);
+          this.expenses = [];
         });
         this.getExpensesForApproval();
-        this.alertify.success("Expense(s) approved successfully");
+        this.alertify.success('Expense(s) approved successfully');
       }, error => {
         this.alertify.error(error);
       });
@@ -75,7 +76,7 @@ export class ApproveExpensesComponent implements OnInit {
       this.adminService.approveAllExpenses().subscribe(() => {
         this.expenseIds = [];
         this.getExpensesForApproval();
-        this.alertify.success("Expenses approved successfully");
+        this.alertify.success('Expenses approved successfully');
       }, error => {
         this.alertify.error(error);
       });

@@ -7,9 +7,12 @@
         <div class="card-header border-0">
           <h3 class="mb-0">Approve Incomes</h3>
         </div>
-        <p class="text-center" *ngIf="incomes.length === 0">
-          No incomes available to approve
-        </p>
+        <div class="d-flex justify-content-center" *ngIf="incomes.length === 0">
+          <div class="no-records mb-4">
+              <img src="./assets/img/theme/blank-page.svg" alt="No records">
+                <p>No incomes available to approve.</p>
+            </div>
+      </div>
         <div class="table-responsive"  *ngIf="incomes.length > 0">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
