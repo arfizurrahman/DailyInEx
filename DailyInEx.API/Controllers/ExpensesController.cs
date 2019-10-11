@@ -47,7 +47,6 @@ namespace DailyInEx.API.Controllers
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
             
-            expenseForCreationDto.Date = DateTime.Now;
             expenseForCreationDto.UserId = userId;
             var expenseToCreate = _mapper.Map<Expense>(expenseForCreationDto);
 
